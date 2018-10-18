@@ -15,3 +15,10 @@ Alperen Erkek <br />
 
 ## [Implementation](https://github.com/CynicalApe/DriveSim/tree/master/implementation)
 
+title: [DriveSim]
+description: [A short description of your site's purpose]
+
+Additionally, you may choose to set the following optional variables:
+
+logo: [https://raw.githubusercontent.com/CynicalApe/DriveSim/master/beta-testing.jpg]
+show_downloads: [true]
