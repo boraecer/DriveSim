@@ -1,6 +1,6 @@
 # DriveSim - CS491 Senior Design Project
 
-## Members <br />
+## Members
 Oguz Kaan Agac <br />
 Bora Ecer <br />
 Alp Ege Basturk <br />
