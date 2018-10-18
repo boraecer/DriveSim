@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+title: [DriveSim]
+description: [A short description of your site's purpose]
+logo: [https://raw.githubusercontent.com/CynicalApe/DriveSim/master/beta-testing.jpg]
+show_downloads: [true]
