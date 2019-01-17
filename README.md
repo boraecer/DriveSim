@@ -11,6 +11,7 @@ Alperen Erkek <br />
 ## [Reports](https://github.com/CynicalApe/DriveSim/tree/master/reports)
 * [Project Specification Report](https://github.com/CynicalApe/DriveSim/blob/master/reports/Project%20Specification%20Report.pdf)
 * [Project Analysis Report](https://github.com/CynicalApe/DriveSim/blob/master/reports/Analysis%20Report.pdf)
+* [High-Level Design Report](https://github.com/CynicalApe/DriveSim/blob/master/reports/High-Level%20Design%20Report.pdf)
 
 ## [Resources](https://github.com/CynicalApe/DriveSim/tree/master/resources)
 
