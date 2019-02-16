@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.25807.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{306D6A36-7A48-40A7-9754-21FA210F9C16}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{5066194F-C3E0-4342-BA68-C7EEB219B565}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{91791890-BB50-4FE2-ADA2-D77E54AC2563}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{1E9A380C-5109-442F-9BBE-66ED810CE1D4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{562DCCF2-EF0F-4C1F-A073-7C2C2DA5AEEB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DriveSim", "Intermediate\ProjectFiles\DriveSim.vcxproj", "{830E070B-79E7-45C8-AA4A-CE9EA6C0250A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{58A3EB86-0A7B-4728-961B-268C861160E4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{EF513F4B-77E6-48AD-BB3B-09F8BCEB86D8}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
+		..\..\..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\..\..\Program Files\Epic Games\UE_4.21\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
 EndProject
 Global
@@ -81,7 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{562DCCF2-EF0F-4C1F-A073-7C2C2DA5AEEB} = {306D6A36-7A48-40A7-9754-21FA210F9C16}
-		{830E070B-79E7-45C8-AA4A-CE9EA6C0250A} = {91791890-BB50-4FE2-ADA2-D77E54AC2563}
+		{562DCCF2-EF0F-4C1F-A073-7C2C2DA5AEEB} = {5066194F-C3E0-4342-BA68-C7EEB219B565}
+		{830E070B-79E7-45C8-AA4A-CE9EA6C0250A} = {1E9A380C-5109-442F-9BBE-66ED810CE1D4}
 	EndGlobalSection
 EndGlobal

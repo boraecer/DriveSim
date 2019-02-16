@@ -35,9 +35,9 @@ public:
 	FORCEINLINE class UStaticMeshComponent* GetMesh() const { return PickupMesh; }
 
 	// Function called on object when collected
-	//UFUNCTION(BluePrintNativeEvent)
-	//void Collected();
-	//virtual void Collected_implementation();
+	/*UFUNCTION(BluePrintNativeEvent)
+	void Collected();
+	virtual void Collected_implementation();*/
 
 
 private:

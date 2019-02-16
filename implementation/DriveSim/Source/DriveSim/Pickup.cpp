@@ -13,6 +13,8 @@ APickup::APickup()
 	PickupMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PickupMesh"));
 	RootComponent = PickupMesh;
 	isActive = true;
+	// Enable collision
+	SetActorEnableCollision(true);
 }
 
 // Called when the game starts or when spawned
@@ -39,9 +41,9 @@ void APickup::SetActive(bool activeState)
 /*void APickup::Collected()
 {
 	int x = 0;
-}*/
-/*void APickup::Collected_implementation()
+}
+void APickup::Collected_implementation()
 {
-	//FString dbStr = GetName();
-	UE_LOG(LogClass, Log, TEXT("Collected "))//, *dbStr)
+	FString dbStr = GetName();
+	UE_LOG(LogClass, Log, TEXT("Collected %s"), *dbStr);
 }*/

@@ -15,6 +15,5 @@ ACoinPickup::ACoinPickup()
 {
 	// call parent to log
 	Super::Collected_implementation();
-
 	Destroy();
 }*/
