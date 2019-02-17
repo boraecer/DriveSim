@@ -13,8 +13,16 @@ APickup::APickup()
 	PickupMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PickupMesh"));
 	RootComponent = PickupMesh;
 	isActive = true;
+
 	// Enable collision
 	SetActorEnableCollision(true);
+
+	collisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("Collision Sphere"));
+	collisionSphere->InitSphereRadius(100);
+	collisionSphere->SetupAttachment(RootComponent);
+
+	//collisionSphere->OnComponentBeginOverlap.AddDynamic(this, &APickup::OnOverlapBegin);
+	//collisionSphere->OnComponentEndOverlap.AddDynamic(this, &APickup::OnOverlapEnd);
 }
 
 // Called when the game starts or when spawned
@@ -46,4 +54,15 @@ void APickup::CollectedImplementation()
 {
 	FString dbStr = GetName();
 	UE_LOG(LogClass, Log, TEXT("Collected %s"), *dbStr);
+}
+void APickup::OnOverlapBegin(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && (OtherActor != this) && OtherComp)
+	{
+		CollectedImplementation();
+	}
+}
+void APickup::OnOverlapEnd(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	// Increase score or else. Do sth when overlap ends.
 }

@@ -5,7 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
-#include "Pickup.generated.h"
+#include "Classes/Components/SphereComponent.h"
+#include "Pickup.generated.h" // Include generated must be the last include
 
 UCLASS()
 class DRIVESIM_API APickup : public AActor
@@ -40,9 +41,17 @@ public:
 	void Collected();
 	virtual void CollectedImplementation();
 
-	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
-		AActor* OtherActor, UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UPROPERTY(VisibleAnywhere, Category = "Pickup")
+	class USphereComponent* collisionSphere;
+
+	UFUNCTION()
+		void OnOverlapBegin(class AActor* OtherActor, 
+			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+			bool bFromSweep, const FHitResult& SweepResult);
+	UFUNCTION()
+		void OnOverlapEnd(class AActor* OtherActor, 
+			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 
 
 private:
