@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Pickup.h"
-#include "Components/StaticMeshComponent.h"
+
 
 // Sets default values
 APickup::APickup()
@@ -38,12 +38,12 @@ void APickup::SetActive(bool activeState)
 {
 	this->isActive = activeState;
 }
-/*void APickup::Collected()
+void APickup::Collected()
 {
-	int x = 0;
+	//
 }
-void APickup::Collected_implementation()
+void APickup::CollectedImplementation()
 {
 	FString dbStr = GetName();
 	UE_LOG(LogClass, Log, TEXT("Collected %s"), *dbStr);
-}*/
+}
