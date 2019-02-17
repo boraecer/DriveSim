@@ -12,9 +12,9 @@ ACoinPickup::ACoinPickup()
 	//mesh->OnComponentBeginOverlap.AddDynamic(this, &ACoinPickup::OnOverlapBegin);
 
 }
-void ACoinPickup::CollectedImplementation()
+/*void ACoinPickup::CollectedImplementation()
 {
 	// call parent to log
 	Super::CollectedImplementation();
 	Destroy();
-}
+}*/

@@ -39,20 +39,20 @@ public:
 	// Function called on object when collected
 	UFUNCTION(BluePrintNativeEvent)
 	void Collected();
-	virtual void CollectedImplementation();
+	void CollectedImplementation();
 
 	UPROPERTY(VisibleAnywhere, Category = "Pickup")
 	class USphereComponent* collisionSphere;
 
 	UFUNCTION()
-		void OnOverlapBegin(class AActor* OtherActor, 
-			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
-			bool bFromSweep, const FHitResult& SweepResult);
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp,
+			AActor* OtherActor, UPrimitiveComponent* OtherComp,
+			int32 OtherBodyIndex, bool bFromSweep,
+			const FHitResult& SweepResult);
 	UFUNCTION()
-		void OnOverlapEnd(class AActor* OtherActor, 
-			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-
+		void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp,
+			class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+			int32 OtherBodyIndex);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pickup", meta = (AllowPrivateAccess = "true"))
