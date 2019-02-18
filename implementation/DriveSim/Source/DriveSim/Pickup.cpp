@@ -61,7 +61,7 @@ void APickup::CollectedImplementation()
 {
 	FString dbStr = GetName();
 	UE_LOG(LogClass, Log, TEXT("Collected %s"), *dbStr);
-	this->Destroy(); // TODO: remove this !
+	this->Destroy(); // TODO: Be careful with this
 }
 void APickup::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, 
 	AActor* OtherActor, UPrimitiveComponent* OtherComp,

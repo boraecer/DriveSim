@@ -39,7 +39,7 @@ public:
 	// Function called on object when collected
 	//UFUNCTION(BluePrintNativeEvent)
 	void Collected();
-	void CollectedImplementation();
+	virtual void CollectedImplementation();
 
 	UPROPERTY(VisibleAnywhere, Category = "Pickup")
 	USphereComponent* collisionSphere;

@@ -17,5 +17,5 @@ class DRIVESIM_API ACoinPickup : public APickup
 public:
 	// Sets default values for this actor's properties
 	ACoinPickup();
-	//void CollectedImplementation() override;
+	void CollectedImplementation() override;
 };
