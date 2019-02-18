@@ -37,12 +37,12 @@ public:
 	FORCEINLINE class UStaticMeshComponent* GetMesh() const { return PickupMesh; }
 
 	// Function called on object when collected
-	UFUNCTION(BluePrintNativeEvent)
+	//UFUNCTION(BluePrintNativeEvent)
 	void Collected();
 	void CollectedImplementation();
 
 	UPROPERTY(VisibleAnywhere, Category = "Pickup")
-	class USphereComponent* collisionSphere;
+	USphereComponent* collisionSphere;
 
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp,

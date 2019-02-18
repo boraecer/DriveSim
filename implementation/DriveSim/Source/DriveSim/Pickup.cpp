@@ -52,6 +52,7 @@ void APickup::SetActive(bool activeState)
 {
 	this->isActive = activeState;
 }
+
 void APickup::Collected()
 {
 	//
