@@ -6,6 +6,7 @@
 
 ABot_Character_AI_Controller::ABot_Character_AI_Controller()
 {
+	myPawn = NULL;
 	PrimaryActorTick.bCanEverTick = true;
 	SightConfig = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("Sight Config"));
 	PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
@@ -20,17 +21,24 @@ ABot_Character_AI_Controller::ABot_Character_AI_Controller()
 	SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
 
 	GetPerceptionComponent()->SetDominantSense(*SightConfig->GetSenseImplementation());
-	GetPerceptionComponent()->OnPerceptionUpdated.AddDynamic(this, &ABot_Character_AI_Controller::OnPawnDetected); // Call back to our function
+	//GetPerceptionComponent()->OnPerceptionUpdated.AddDynamic(this, &ABot_Character_AI_Controller::OnPawnDetected); // Call back to our function
 	GetPerceptionComponent()->ConfigureSense(*SightConfig);
 }
 void ABot_Character_AI_Controller::BeginPlay()
 {
 	Super::BeginPlay();
+	/*FVector NewLocation = GetPawn()->GetActorLocation();
+	print("Move to Called");
+	FVector forwardV = GetPawn()->GetActorForwardVector();
+
+	NewLocation.Z += 500;
+	MoveToLocation(NewLocation );*/
 }
 
 void ABot_Character_AI_Controller::Possess(APawn * pawn)
 {
 	Super::Possess(pawn);
+	myPawn = pawn;
 }
 
 void ABot_Character_AI_Controller::Tick(float DeltaSeconds)
@@ -48,4 +56,9 @@ FRotator ABot_Character_AI_Controller::GetControlRotation() const
 void ABot_Character_AI_Controller::OnPawnDetected(TArray<AActor*> DetectedPawns)
 {
 	// Do nothing for now
+}
+
+FVector ABot_Character_AI_Controller::getMyPawnVector()
+{
+	return this->myPawn->GetActorForwardVector();
 }

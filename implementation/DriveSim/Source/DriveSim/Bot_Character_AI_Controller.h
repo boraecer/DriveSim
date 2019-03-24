@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "Bot_Character_AI_Controller.generated.h"
+#define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
 
 /**
  * 
@@ -25,6 +26,8 @@ public:
 
 	UFUNCTION()
 	void OnPawnDetected(TArray<AActor*> DetectedPawns);
+	UFUNCTION(BlueprintCallable, Category = "Bot")
+	FVector getMyPawnVector();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
 		float AISightRadius = 500.0;
@@ -36,4 +39,7 @@ public:
 		float AIFieldOfView = 100;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
 		class UAISenseConfig_Sight* SightConfig;
+
+public:
+	APawn* myPawn;
 };
