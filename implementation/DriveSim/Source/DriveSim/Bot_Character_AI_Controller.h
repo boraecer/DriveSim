@@ -28,6 +28,8 @@ public:
 	void OnPawnDetected(TArray<AActor*> DetectedPawns);
 	UFUNCTION(BlueprintCallable, Category = "Bot")
 	FVector getMyPawnVector();
+	UFUNCTION(BlueprintCallable, Category = "Bot")
+	FVector getMyPawnLocation();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
 		float AISightRadius = 500.0;

@@ -62,3 +62,7 @@ FVector ABot_Character_AI_Controller::getMyPawnVector()
 {
 	return this->myPawn->GetActorForwardVector();
 }
+FVector ABot_Character_AI_Controller::getMyPawnLocation()
+{
+	return myPawn->GetActorLocation();
+}
