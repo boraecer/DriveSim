@@ -34,3 +34,4 @@
 implementation/DriveSim/Content/StarterContent/Architecture/Floor_400x400.uasset
 implementation/DriveSim/Content/VehicleBP/Maps/VehicleExampleMap.umap
 implementation/DriveSim/DriveSim.sln
+implementation/DriveSim/Content/Movies/MainMenuBQ.mov
