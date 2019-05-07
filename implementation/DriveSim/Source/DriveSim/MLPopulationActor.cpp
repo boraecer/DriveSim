@@ -362,7 +362,7 @@ AMLPopulationActor::new_generation()
     if (current_geneneration > 1)
     {
         check(previous_gen_elite->network.is_elite);
-        check(FMath::Abs(previous_gen_elite->score - prev_best_score) <= precision_epsilon);
+        check(FMath::Abs(previous_gen_elite->score - prev_best_score) <= elite_precision_epsilon);
     }
 
     curr_max_check_point = 0;

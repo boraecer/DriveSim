@@ -78,13 +78,15 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     void* prev_check_point = NULL;
     void* prev_prev_check_point = NULL;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class UStaticMeshComponent* StaticMesh = nullptr;
-    class USpringArmComponent* camera_spring_arm = nullptr;
-    class UCameraComponent* attached_camera = nullptr;
-
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* FrontLeftSensor = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* FrontRightSensor = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* BackRightSensor = nullptr;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* BackLeftSensor = nullptr;
     FName FrontLeftSensorSocket;
     FName FrontRightSensorSocket;
@@ -170,6 +172,7 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     FVector car_color_simple_red;
     FVector car_color_orange;
     FVector car_color_elite;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool dead_set = false;
     FVector actor_new_position;
     FRotator actor_new_rotation;
