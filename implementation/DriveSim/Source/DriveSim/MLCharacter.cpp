@@ -58,7 +58,6 @@ AMLCharacter::AMLCharacter()
     BackRightSensorSocket = FName("BackRightSensor");
 
     camera_spring_arm->SetupAttachment(RootComponent);
-    attached_camera->SetupAttachment(camera_spring_arm, USpringArmComponent::SocketName);
 
     FrontLeftSensor->SetupAttachment(StaticMesh, FrontRightSensorSocket);
     FrontRightSensor->SetupAttachment(StaticMesh, FrontLeftSensorSocket);
@@ -102,6 +101,9 @@ AMLCharacter::AMLCharacter()
     car_color_elite = FVector(0.615f, 0.0f, 0.963f);
     UMaterialInterface* Material1 = StaticMesh->GetMaterial(0);
     material1 = StaticMesh->CreateDynamicMaterialInstance(1, Material1);
+    spring_arm_angle = FRotator(-60.0f, 0.f, 0.0f);
+    update_component_locations();
+    attached_camera->SetupAttachment(camera_spring_arm, USpringArmComponent::SocketName);
     /*UMaterialInterface* Material2 = StaticMesh->GetMaterial(1);
     material2 = StaticMesh->CreateDynamicMaterialInstance(1, Material2);*/
 }
@@ -254,7 +256,6 @@ AMLCharacter::update_rotation(float dt, float steering_input)
 void
 AMLCharacter::update_component_locations()
 {
-
     FVector root_world_location = RootComponent->GetComponentLocation();
     SetActorLocation(root_world_location);
     root_world_location = RootComponent->GetComponentLocation();
@@ -265,8 +266,7 @@ AMLCharacter::update_component_locations()
     }
     if (camera_spring_arm)
     {
-        camera_spring_arm->SetRelativeLocationAndRotation(FVector::ZeroVector,
-                                                          FRotator(-60.0f, 0.f, 0.0f));
+        camera_spring_arm->SetRelativeLocationAndRotation(FVector::ZeroVector, spring_arm_angle);
         camera_spring_arm->SetWorldLocation(root_world_location);
     }
     if (attached_camera)
@@ -286,18 +286,18 @@ AMLCharacter::update_component_locations()
 void
 AMLCharacter::handle_attachments()
 {
-    if (attached_camera)
-    {
-        /*FDetachmentTransformRules detachmenRule(EDetachmentRule::KeepRelative, false);
-        attached_camera->DetachFromComponent(detachmenRule);
-        FVector socket_location;
-        FRotator socket_rotation;
-        camera_spring_arm->GetSocketWorldLocationAndRotation(USpringArmComponent::SocketName,
-        socket_location, socket_rotation);
-        attached_camera->SetWorldLocationAndRotation(socket_location, socket_rotation);
-        attached_camera->SetupAttachment(camera_spring_arm, USpringArmComponent::SocketName);
-        UE_LOG(LogTemp, Warning, TEXT("Attached Camera"));*/
-    }
+  //  if (attached_camera)
+  //  {
+		//FDetachmentTransformRules detachmenRule(EDetachmentRule::KeepRelative, false);
+  //      attached_camera->DetachFromComponent(detachmenRule);
+  //      FVector socket_location;
+  //      FRotator socket_rotation;
+  //      camera_spring_arm->GetSocketWorldLocationAndRotation(USpringArmComponent::SocketName,
+  //      socket_location, socket_rotation);
+  //      attached_camera->SetWorldLocationAndRotation(socket_location, socket_rotation);
+  //      attached_camera->SetupAttachment(camera_spring_arm, USpringArmComponent::SocketName);
+  //      UE_LOG(LogTemp, Warning, TEXT("Attached Camera"));
+  //  }
 }
 
 void

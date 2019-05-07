@@ -91,6 +91,7 @@ AMLPopulationActor::spawn_new_batch()
           AMLCharacter::StaticClass(), default_start_location, default_start_rotation, *param);
         assert(spawned_actor->network.nodes.Num() != 0);
         spawned_actor->actor_position = default_start_location;
+        spawned_actor->update_component_locations();
         players.Add(spawned_actor);
     }
     delete param;

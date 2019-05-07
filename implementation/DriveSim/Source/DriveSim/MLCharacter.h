@@ -143,8 +143,11 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     float destruction_distance = 50.0f;
     UPROPERTY(EditAnywhere)
     float stale_limit = 3.5f;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool has_crashed = false;
-
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FRotator spring_arm_angle;
+    
     // FOR DEBUG
     int pushed_frame_count = 0;
     int read_frame_count = 0;
