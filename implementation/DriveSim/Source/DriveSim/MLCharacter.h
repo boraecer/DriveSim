@@ -176,6 +176,7 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     FVector car_color_simple_red;
     FVector car_color_orange;
     FVector car_color_elite;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool dead_set = false;
     FVector actor_new_position;
     FRotator actor_new_rotation;
