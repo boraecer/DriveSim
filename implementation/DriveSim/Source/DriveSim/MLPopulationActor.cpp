@@ -53,29 +53,28 @@ void
 AMLPopulationActor::update(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-    current_gen_time += DeltaTime;
-
     int dead_count = 0;
-    ParallelFor(players.Num(), [&](int32 Idx) { players[Idx]->update(DeltaTime); });
-
+    ParallelFor(population_size, [&](int idx) { players[idx]->update(DeltaTime); });
     for (auto& player : players)
     {
         if (player->has_crashed)
-            dead_count++;
-        player->SetActorLocationAndRotation(player->actor_new_position, player->actor_new_rotation);
-        if (player->has_crashed && !player->dead_set)
         {
-            player->set_car_color(player->car_color_simple_red);
-            player->dead_set = true;
+            if (!player->dead_set)
+            {
+                player->set_car_color(player->car_color_simple_red);
+                player->dead_set = true;
+            }
+            dead_count++;
+        }
+        else
+        {
+            player->SetActorLocationAndRotation(player->actor_new_position,
+                                                player->actor_new_rotation);
         }
     }
     if (dead_count == players.Num())
     {
         new_generation();
-    }
-    if (current_gen_time - time_interval > 2)
-    {
-        time_interval = current_gen_time;
     }
 }
 
@@ -91,7 +90,6 @@ AMLPopulationActor::spawn_new_batch()
           AMLCharacter::StaticClass(), default_start_location, default_start_rotation, *param);
         assert(spawned_actor->network.nodes.Num() != 0);
         spawned_actor->actor_position = default_start_location;
-        spawned_actor->update_component_locations();
         players.Add(spawned_actor);
     }
     delete param;
@@ -362,17 +360,25 @@ AMLPopulationActor::new_generation()
     if (current_geneneration > 1)
     {
         check(previous_gen_elite->network.is_elite);
-        check(FMath::Abs(previous_gen_elite->score - prev_best_score) <= elite_precision_epsilon);
+		check(FMath::Abs(previous_gen_elite->score - prev_best_score) <= elite_precision_epsilon);
     }
 
     curr_max_check_point = 0;
-    for (auto& player : players)
+	for (auto& player : players)
     {
         if (curr_max_check_point < player->checkpoint_count)
         {
             curr_max_check_point = player->checkpoint_count;
         }
     }
+    TArray<float> checkpoint_scores;
+    TArray<float> sensor_penalties;
+    checkpoint_scores.Reserve(population_size);
+    for (auto& player : players)
+    {
+        checkpoint_scores.Add(player->check_point_score);
+        sensor_penalties.Add(player->sensor_penalty);
+	}
     UE_LOG(LogTemp, Warning, TEXT("#############################################"));
 
     // TODO_OGUZ: DEBUG BLOCK
@@ -446,7 +452,9 @@ AMLPopulationActor::new_generation()
                species.Num());
         UE_LOG(LogTemp, Warning, TEXT("Max Score: %f"), overall_best_score);
         UE_LOG(LogTemp, Warning, TEXT("Current Gen Max Score: %f"), cur_gen_best_score);
+        UE_LOG(LogTemp, Warning, TEXT("Checkpoint Score: %f, Sensor Penalty: %f, Distance Score: %f"), current_best->check_point_score,current_best->sensor_penalty,current_best->distance_traveled);
         UE_LOG(LogTemp, Warning, TEXT("Max checkpoint: %d"), curr_max_check_point);
+        UE_LOG(LogTemp, Warning, TEXT("Lap Count: %d"), current_best->lap_count);
         UE_LOG(LogTemp,
                Warning,
                TEXT("Mutation Constant: %f Staleness: %d"),
@@ -474,6 +482,9 @@ AMLPopulationActor::new_generation()
 
     children_genomes.Add(current_best->network);
     prev_best_score = current_best->score;
+    prev_best_distance_score = current_best->distance_traveled;
+    prev_best_score = current_best->score;
+    prev_best_checkpoint_score = current_best->check_point_score;
     // DEBUG
     // TArray<float> elite_prev_inputs = current_best->inputs;
     // TArray<float> elite_prev_outputs = current_best->outputs;
@@ -496,7 +507,7 @@ AMLPopulationActor::new_generation()
         {
             generation_info.copy_count++;
             children_genomes.Add(species[i].players[0]->network);
-            check(children_genomes.Last().connections.Num() >= 20)
+            // check(children_genomes.Last().connections.Num() >= 20)
         }
 
         int allowed_children_count = (species[i].avg_fitness * players.Num() / avg_fitness_sum) - 1;
@@ -504,7 +515,7 @@ AMLPopulationActor::new_generation()
         for (int j = 0; j < allowed_children_count; j++)
         {
             create_child(i);
-            check(children_genomes.Last().connections.Num() >= 20)
+            // check(children_genomes.Last().connections.Num() >= 20)
         }
     }
 
@@ -516,7 +527,7 @@ AMLPopulationActor::new_generation()
 
     for (auto& player : players)
     {
-        check(player->network.connections.Num() >= 20);
+        // check(player->network.connections.Num() >= 20);
     }
 
     while (children_genomes.Num() < players.Num())
@@ -531,7 +542,7 @@ AMLPopulationActor::new_generation()
         it->network = children_genomes[i];
         it->network.reset_genome();
         it->reset_player(default_start_location, default_start_rotation);
-        check(it->network.connections.Num() >= 20)
+        // check(it->network.connections.Num() >= 20)
     }
     players[0]->network.is_elite = true;
     players[0]->set_car_color(players[0]->car_color_elite);

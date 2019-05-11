@@ -64,7 +64,7 @@ class DRIVESIM_API AMLPopulationActor : public AActor
 
     // ML info
     MLGenome best_brain;
-    int population_size = 170;
+    int population_size = 750;
     int staleness = 0;
     int staleness_constant = 3;
     int max_mutation_constant = 100;
@@ -91,7 +91,10 @@ class DRIVESIM_API AMLPopulationActor : public AActor
     GENINFO generation_info{ 0 };
     float time_interval = 0;
     float prev_best_score = 0;
-    float elite_precision_epsilon = 0.01;
+    float prev_best_checkpoint_score = 0;
+    float prev_best_distance_score = 0;
+    float prev_best_sensor_score = 0;
+    float elite_precision_epsilon = 0.001;
 
     // Editor
     TArray<AActor*> start_point_arr;

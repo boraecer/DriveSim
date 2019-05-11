@@ -77,17 +77,16 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     void* first_check_point = NULL;
     void* prev_check_point = NULL;
     void* prev_prev_check_point = NULL;
-
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class UStaticMeshComponent* StaticMesh = nullptr;
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* FrontLeftSensor = nullptr;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* FrontRightSensor = nullptr;
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* BackRightSensor = nullptr;
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USensorComponent* BackLeftSensor = nullptr;
+
     FName FrontLeftSensorSocket;
     FName FrontRightSensorSocket;
     FName BackRightSensorSocket;
@@ -100,9 +99,15 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     bool bZoomingIn;
 
     MLGenome network;
+    int lap_count = 0;
+    const int max_lap_limit = 3;
     float fitness;
     float score;
     float check_point_score;
+    float sensor_penalty_to_add = 0;
+    int pushed_frame_count = 0;
+    const float sensor_penalty_mult = .07f;
+    float sensor_penalty = 0;
     int checkpoint_count;
     float last_check_point_time;
     float alive_time;
@@ -122,11 +127,12 @@ class DRIVESIM_API AMLCharacter : public ACharacter
 
     float ML_input_count;
     float max_sensor_input;
-    const int ML_sensor_count = 8;
+    const int ML_ray_count = 4;
     const int ML_output_count = 2;
     const int velocity_input_index = 8;
     const float check_point_score_mult = 100;
 
+	
     UPROPERTY(EditAnywhere)
     float max_speed = 50.f;
     UPROPERTY(EditAnywhere)
@@ -147,11 +153,9 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     float stale_limit = 3.5f;
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool has_crashed = false;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FRotator spring_arm_angle;
-    
+
     // FOR DEBUG
-    int pushed_frame_count = 0;
+    
     int read_frame_count = 0;
     TArray<float> inputs;
     TArray<float> outputs;
@@ -172,7 +176,6 @@ class DRIVESIM_API AMLCharacter : public ACharacter
     FVector car_color_simple_red;
     FVector car_color_orange;
     FVector car_color_elite;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     bool dead_set = false;
     FVector actor_new_position;
     FRotator actor_new_rotation;
